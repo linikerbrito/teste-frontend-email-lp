@@ -16,11 +16,12 @@
 	--space-6: 4rem;
 	--radius-card: 0.5rem;
 	--shadow-panel: 0 1rem 2.5rem rgb(0 0 0 / 16%);
+	--shadow-recommended: 0 0.5rem 1.5rem rgb(20 22 26 / 14%);
 	--font-body: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 	--font-size-body: 1rem;
 	--font-size-small: 0.875rem;
 	--font-size-lead: clamp(1.125rem, 2vw, 1.375rem);
-	--font-size-title: clamp(2.5rem, 7vw, 4.75rem);
+	--font-size-title: clamp(2.5rem, 7vw, 4rem);
 	--font-size-section: clamp(1.75rem, 4vw, 2.5rem);
 	--font-size-metric: clamp(1.125rem, 2.8vw, 1.5rem);
 	--line-height-body: 1.6;
@@ -65,8 +66,16 @@ a {
 
 /* Base: limita linhas longas e mantém as âncoras visíveis ao navegar pela página. */
 h1,
+h2,
+h3,
 p {
 	margin: 0;
+}
+
+h1,
+h2,
+h3 {
+	text-wrap: balance;
 }
 
 #inicio,
@@ -191,8 +200,8 @@ a:focus-visible {
 
 .hero__layout {
 	display: grid;
-	gap: var(--space-5);
-	padding-block: var(--space-6);
+	gap: var(--space-4);
+	padding-block: var(--space-5);
 }
 
 .hero__content {
@@ -207,7 +216,7 @@ a:focus-visible {
 }
 
 .hero__title {
-	max-width: 13ch;
+	max-width: 16ch;
 	margin-bottom: var(--space-3);
 	font-size: var(--font-size-title);
 	font-weight: 760;
@@ -239,6 +248,161 @@ a:focus-visible {
 
 .hero__visual {
 	align-self: center;
+}
+
+/* Seções: o respiro compartilhado mantém uma transição regular entre conteúdo e ingressos. */
+.process-section,
+.tickets-section {
+	padding-block: var(--space-6);
+}
+
+.process-section {
+	background: var(--color-paper);
+}
+
+.tickets-section {
+	background: var(--color-white);
+}
+
+.section-heading {
+	max-width: var(--container-copy);
+	margin-bottom: var(--space-4);
+}
+
+.section-heading__title {
+	margin-bottom: var(--space-2);
+	font-size: var(--font-size-section);
+	line-height: 1.15;
+}
+
+.section-heading__intro {
+	max-width: 58ch;
+	color: var(--color-muted);
+}
+
+.process-list,
+.ticket-list,
+.ticket-card__features {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+.process-list {
+	display: grid;
+	gap: var(--space-2);
+}
+
+.process-step {
+	min-width: 0;
+	padding: var(--space-3);
+	border-top: 2px solid var(--color-ink);
+	background: var(--color-white);
+}
+
+.process-step__heading {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--space-2);
+	margin-bottom: var(--space-2);
+}
+
+.process-step__number {
+	color: var(--color-muted);
+	font-size: var(--font-size-small);
+	font-weight: 750;
+	font-variant-numeric: tabular-nums;
+}
+
+.process-step__icon {
+	width: 3rem;
+	height: 3rem;
+}
+
+.process-step__title,
+.ticket-card__title {
+	margin-bottom: var(--space-1);
+	font-size: 1.25rem;
+	line-height: 1.25;
+}
+
+.process-step__text {
+	color: var(--color-muted);
+}
+
+.ticket-list {
+	display: grid;
+	gap: var(--space-3);
+}
+
+.ticket-card {
+	display: flex;
+	min-width: 0;
+	flex-direction: column;
+	padding: var(--space-3);
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-card);
+	background: var(--color-paper);
+}
+
+.ticket-card--recommended {
+	border: 3px solid var(--color-ink);
+}
+
+.ticket-card__content {
+	flex: 1;
+}
+
+.ticket-card__badge {
+	width: fit-content;
+	padding: 0.2rem var(--space-1);
+	margin-bottom: var(--space-2);
+	border-radius: 999px;
+	background: var(--color-orange);
+	color: var(--color-ink);
+	font-size: var(--font-size-small);
+	font-weight: 750;
+}
+
+.ticket-card__price {
+	margin-bottom: var(--space-1);
+	font-size: var(--font-size-metric);
+	font-weight: 750;
+	font-variant-numeric: tabular-nums;
+	line-height: 1.35;
+}
+
+.ticket-card__includes {
+	margin-bottom: var(--space-1);
+	color: var(--color-muted);
+	font-weight: 650;
+}
+
+.ticket-card__features {
+	display: grid;
+	gap: var(--space-1);
+	margin-bottom: var(--space-3);
+}
+
+.ticket-card__features li {
+	position: relative;
+	padding-left: var(--space-3);
+}
+
+.ticket-card__features li::before {
+	position: absolute;
+	top: 0.65em;
+	left: 0;
+	width: 0.5rem;
+	height: 0.5rem;
+	border-radius: 50%;
+	background: var(--color-orange);
+	content: "";
+}
+
+.ticket-card__cta {
+	width: 100%;
 }
 
 .metric-panel {
@@ -344,19 +508,13 @@ a:focus-visible {
 
 /* Media queries: a composição só ganha colunas quando há largura para manter o texto legível. */
 @media (min-width: 48rem) {
-	.hero__layout {
-		grid-template-columns: minmax(0, 1.05fr) minmax(20rem, 0.95fr);
-		align-items: center;
-		gap: var(--space-5);
-		min-height: 38rem;
-	}
-
-	.hero__visual {
-		min-width: 0;
-	}
-
 	.metric-panel {
 		padding: var(--space-4);
+	}
+
+	.process-list {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: var(--space-2);
 	}
 
 	.site-footer__inner {
@@ -367,7 +525,37 @@ a:focus-visible {
 
 @media (min-width: 64rem) {
 	.hero__layout {
-		gap: var(--space-6);
+		grid-template-columns: minmax(0, 1.05fr) minmax(20rem, 0.95fr);
+		align-items: center;
+		gap: var(--space-4);
+		min-height: 34rem;
+		padding-block: var(--space-3);
+	}
+
+	.hero__visual {
+		min-width: 0;
+	}
+
+	.metric-panel {
+		padding: var(--space-4);
+	}
+}
+
+@media (min-width: 56.25rem) {
+	.ticket-list {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		align-items: stretch;
+		gap: var(--space-2);
+	}
+
+	.ticket-card {
+		padding: var(--space-3);
+	}
+
+	.ticket-card--recommended {
+		z-index: 1;
+		transform: translateY(-0.5rem);
+		box-shadow: var(--shadow-recommended);
 	}
 }
 
