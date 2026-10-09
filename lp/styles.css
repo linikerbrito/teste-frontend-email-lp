@@ -1,0 +1,378 @@
+/* Tokens: centralizam as decisões visuais para manter as próximas seções coerentes. */
+:root {
+	color-scheme: light;
+	--color-ink: #14161A;
+	--color-paper: #F6F4EF;
+	--color-white: #FFFFFF;
+	--color-muted: #5B606B;
+	--color-orange: #FF5A1F;
+	--color-orange-hover: #FF7A49;
+	--color-border: #DAD8D1;
+	--space-1: 0.5rem;
+	--space-2: 1rem;
+	--space-3: 1.5rem;
+	--space-4: 2rem;
+	--space-5: 3rem;
+	--space-6: 4rem;
+	--radius-card: 0.5rem;
+	--shadow-panel: 0 1rem 2.5rem rgb(0 0 0 / 16%);
+	--font-body: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+	--font-size-body: 1rem;
+	--font-size-small: 0.875rem;
+	--font-size-lead: clamp(1.125rem, 2vw, 1.375rem);
+	--font-size-title: clamp(2.5rem, 7vw, 4.75rem);
+	--font-size-section: clamp(1.75rem, 4vw, 2.5rem);
+	--font-size-metric: clamp(1.125rem, 2.8vw, 1.5rem);
+	--line-height-body: 1.6;
+	--container-wide: 76rem;
+	--container-copy: 38rem;
+	--focus-inner: #14161A;
+	--focus-outer: #FFFFFF;
+}
+
+/* Reset: reduz diferenças entre navegadores sem remover os estilos nativos de foco. */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	background: var(--color-paper);
+	scroll-padding-top: var(--space-4);
+}
+
+body {
+	min-width: 20rem;
+	margin: 0;
+	background: var(--color-paper);
+	color: var(--color-ink);
+	font-family: var(--font-body);
+	font-size: var(--font-size-body);
+	line-height: var(--line-height-body);
+	-webkit-font-smoothing: antialiased;
+}
+
+img,
+svg {
+	display: block;
+	max-width: 100%;
+}
+
+a {
+	color: inherit;
+}
+
+/* Base: limita linhas longas e mantém as âncoras visíveis ao navegar pela página. */
+h1,
+p {
+	margin: 0;
+}
+
+#inicio,
+#planos {
+	scroll-margin-top: var(--space-4);
+}
+
+/* Utilitários: o link de salto só aparece quando recebe foco de teclado. */
+.container {
+	width: min(calc(100% - var(--space-4)), var(--container-wide));
+	margin-inline: auto;
+}
+
+.visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+.page-skip-link {
+	position: fixed;
+	z-index: 2;
+	top: var(--space-2);
+	left: var(--space-2);
+	padding: var(--space-1) var(--space-2);
+	transform: translateY(-200%);
+	border-radius: var(--radius-card);
+	background: var(--color-white);
+	color: var(--color-ink);
+	font-weight: 700;
+}
+
+.page-skip-link:focus-visible {
+	transform: translateY(0);
+}
+
+a:focus-visible {
+	outline: 3px solid var(--focus-inner);
+	outline-offset: 3px;
+	box-shadow: 0 0 0 6px var(--focus-outer);
+}
+
+/* Componentes: o cabeçalho mantém a marca e o acesso aos ingressos no primeiro viewport. */
+.site-header {
+	background: var(--color-paper);
+}
+
+.site-header__inner {
+	display: flex;
+	min-height: 5rem;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--space-2);
+}
+
+.site-header__brand {
+	display: inline-flex;
+	min-width: 0;
+	align-items: center;
+	text-decoration: none;
+}
+
+.site-header__logo {
+	width: 12rem;
+	height: auto;
+}
+
+.site-header__link {
+	display: inline-flex;
+	min-height: 2.75rem;
+	align-items: center;
+	font-weight: 700;
+	text-decoration-thickness: 0.1em;
+	text-underline-offset: 0.2em;
+}
+
+.site-header__link:hover {
+	text-decoration-thickness: 0.16em;
+}
+
+.btn {
+	display: inline-flex;
+	min-height: 2.75rem;
+	align-items: center;
+	justify-content: center;
+	padding: var(--space-1) var(--space-3);
+	border: 2px solid transparent;
+	border-radius: var(--radius-card);
+	font-weight: 750;
+	line-height: 1.3;
+	text-align: center;
+	text-decoration: none;
+	transition: background-color 160ms ease, transform 160ms ease;
+}
+
+.btn--primary {
+	border-color: var(--color-orange);
+	background: var(--color-orange);
+	color: var(--color-ink);
+}
+
+.btn--primary:hover {
+	border-color: var(--color-orange-hover);
+	background: var(--color-orange-hover);
+}
+
+.btn--primary:active {
+	transform: translateY(1px);
+}
+
+/* Hero: o painel é um exemplo visual, não uma alegação de desempenho do evento. */
+.hero {
+	background: var(--color-ink);
+	color: var(--color-white);
+}
+
+.hero__layout {
+	display: grid;
+	gap: var(--space-5);
+	padding-block: var(--space-6);
+}
+
+.hero__content {
+	max-width: var(--container-copy);
+}
+
+.hero__eyebrow {
+	margin-bottom: var(--space-3);
+	color: var(--color-orange);
+	font-size: var(--font-size-small);
+	font-weight: 750;
+}
+
+.hero__title {
+	max-width: 13ch;
+	margin-bottom: var(--space-3);
+	font-size: var(--font-size-title);
+	font-weight: 760;
+	letter-spacing: 0;
+	line-height: 1.04;
+}
+
+.hero__lead {
+	max-width: 36ch;
+	margin-bottom: var(--space-2);
+	color: var(--color-paper);
+	font-size: var(--font-size-lead);
+	line-height: 1.45;
+}
+
+.hero__audience {
+	max-width: 50ch;
+	margin-bottom: var(--space-3);
+	color: var(--color-paper);
+}
+
+.hero__event {
+	margin-bottom: var(--space-2);
+	padding-left: var(--space-2);
+	border-left: 3px solid var(--color-orange);
+	color: var(--color-white);
+	font-weight: 650;
+}
+
+.hero__visual {
+	align-self: center;
+}
+
+.metric-panel {
+	padding: var(--space-3);
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-card);
+	background: var(--color-paper);
+	box-shadow: var(--shadow-panel);
+	color: var(--color-ink);
+}
+
+.metric-panel__header,
+.metric-panel__footer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--space-1);
+}
+
+.metric-panel__header {
+	margin-bottom: var(--space-2);
+}
+
+.metric-panel__eyebrow,
+.metric-panel__tag,
+.metric-panel__label {
+	font-size: var(--font-size-small);
+	font-weight: 750;
+}
+
+.metric-panel__tag {
+	padding: 0.2rem var(--space-1);
+	border: 1px solid var(--color-border);
+	border-radius: 999px;
+}
+
+.metric-panel__title {
+	margin-bottom: var(--space-2);
+	font-size: 1.125rem;
+	font-weight: 700;
+}
+
+.metric-panel__metrics {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: var(--space-1);
+}
+
+.metric-panel__metric {
+	min-width: 0;
+	padding: var(--space-1);
+	border-top: 2px solid var(--color-orange);
+	background: var(--color-white);
+}
+
+.metric-panel__label {
+	margin-bottom: 0.2rem;
+	color: var(--color-muted);
+}
+
+.metric-panel__value {
+	font-size: var(--font-size-metric);
+	font-weight: 750;
+	letter-spacing: 0;
+	line-height: 1.2;
+	font-variant-numeric: tabular-nums;
+}
+
+.metric-panel__chart {
+	width: 100%;
+	height: auto;
+	margin-top: var(--space-2);
+}
+
+.metric-panel__footer {
+	color: var(--color-muted);
+	font-size: var(--font-size-small);
+}
+
+.metric-panel__note {
+	margin-top: var(--space-2);
+	color: var(--color-muted);
+	font-size: var(--font-size-small);
+}
+
+/* Rodapé: mantém a identificação do teste separada da chamada principal. */
+.site-footer {
+	padding-block: var(--space-4);
+	background: var(--color-paper);
+	color: var(--color-muted);
+	font-size: var(--font-size-small);
+}
+
+.site-footer__inner {
+	display: grid;
+	gap: var(--space-1);
+}
+
+.site-footer__brand {
+	color: var(--color-ink);
+	font-weight: 700;
+}
+
+/* Media queries: a composição só ganha colunas quando há largura para manter o texto legível. */
+@media (min-width: 48rem) {
+	.hero__layout {
+		grid-template-columns: minmax(0, 1.05fr) minmax(20rem, 0.95fr);
+		align-items: center;
+		gap: var(--space-5);
+		min-height: 38rem;
+	}
+
+	.hero__visual {
+		min-width: 0;
+	}
+
+	.metric-panel {
+		padding: var(--space-4);
+	}
+
+	.site-footer__inner {
+		grid-template-columns: 1fr auto;
+		align-items: center;
+	}
+}
+
+@media (min-width: 64rem) {
+	.hero__layout {
+		gap: var(--space-6);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.btn {
+		transition: none;
+	}
+}
