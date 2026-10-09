@@ -1,35 +1,71 @@
 # Quadrante Growth Lab | Mesa 4X
 
 ## Como abrir e testar localmente
-Eu abro `email/index.html` ou `lp/index.html` diretamente no navegador. As duas peças são arquivos estáticos e não exigem instalação, servidor, build ou dependências externas.
 
-Mantive os logos do email em `email/assets/`. Usei `example.com` como destino placeholder para inscrição, descadastro e preferências.
+O projeto é composto por duas peças estáticas, sem necessidade de instalação de dependências, servidor local ou processo de build.
 
-Na LP, abro `lp/index.html` diretamente. Conferi no Chromium integrado ao VS Code em 320, 375, 768 e 1280 px. Testei navegação por Tab, foco visível, Enter e Espaço na FAQ, além da ausência de overflow horizontal nesses tamanhos.
+- **Email:** abra `email/index.html` diretamente no navegador.
+- **Landing Page:** abra `lp/index.html` diretamente no navegador.
+
+Os logotipos do email estão armazenados localmente em `email/assets/`. Os links de inscrição, descadastro e preferências de comunicação utilizam `example.com` como destino demonstrativo.
 
 ## Decisões técnicas
-No email, usei tabelas de apresentação com estilos essenciais inline e um contêiner fluido com limite de 600 px. Acrescentei uma ghost table condicional para fixar essa largura no Outlook desktop, configuração MSO de 96 PPI e botões bulletproof com VML, acompanhados de links HTML para os demais clientes. O preheader fica oculto no corpo e usa caracteres de preenchimento para evitar que texto seguinte apareça no preview.
 
-Mantive CSS em um bloco pequeno para reset, responsividade e dark mode. As regras usam `prefers-color-scheme` para clientes compatíveis e `data-ogsc` e `data-ogsb` para Outlook.com. Criei duas versões PNG locais do wordmark para fundos claros e escuros.
+### Email HTML
 
-Na LP, usei landmarks, títulos hierárquicos, link de salto, SVGs inline e classes BEM. Centralizei cores e medidas em tokens CSS. A FAQ usa `<details>` e `<summary>` sem JavaScript, com animação progressiva de `::details-content` onde há suporte.
+A estrutura utiliza tabelas de apresentação, com `role="presentation"` onde apropriado, CSS inline para os estilos essenciais e um contêiner fluido com largura máxima de 600 px.
 
-Organizei os ingressos em cartões Classic, VIP e Camarote, mantendo o VIP identificado por selo e borda. Na FAQ, usei cartões com várias respostas abertas de forma independente. O texto laranja aberto usa `#C2410C`, com contraste calculado de 5,18:1 sobre branco; reservei o laranja da marca para bordas e detalhes.
+Para compatibilidade com o Outlook desktop, implementei uma ghost table condicional para preservar a largura do contêiner, configuração MSO de 96 PPI e botões bulletproof com VML, acompanhados de links HTML como alternativa para os demais clientes.
+
+O preheader permanece visualmente oculto no corpo do email, com caracteres de preenchimento para reduzir a exibição de conteúdo indesejado na prévia da mensagem.
+
+Mantive um bloco CSS compacto para resets, responsividade e dark mode. As regras utilizam `prefers-color-scheme` nos clientes compatíveis e seletores `data-ogsc` e `data-ogsb` para ajustes no Outlook.com.
+
+Também preparei duas versões PNG locais do wordmark, destinadas a fundos claros e escuros, para preservar a legibilidade da identidade visual em diferentes condições de exibição.
+
+### Landing Page
+
+A página utiliza HTML semântico, com landmarks, hierarquia de títulos, link de salto para o conteúdo principal e SVGs inline para elementos visuais.
+
+Organizei os estilos com a convenção BEM e centralizei cores, espaçamentos e outras medidas em tokens CSS, facilitando a manutenção e a consistência visual.
+
+A interface é responsiva e utiliza a FAQ nativa com `<details>` e `<summary>`, sem JavaScript. A animação de abertura e fechamento utiliza aprimoramentos progressivos com `::details-content` e recursos modernos de dimensionamento, mantendo o comportamento funcional sem depender da animação.
+
+Os planos Classic, VIP e Camarote são apresentados em cartões, com destaque visual para a opção recomendada por meio de selo e borda.
+
+Na FAQ, cada item pode ser expandido independentemente dos demais. Para os textos em laranja sobre fundo branco, utilizei `#C2410C`, com contraste calculado de 5,18:1. O laranja da marca também aparece em bordas e detalhes visuais.
 
 ## Compatibilidade e limitações
-Não testei o email nos clientes reais abaixo. A matriz registra as técnicas implementadas, não uma confirmação de renderização.
 
-| Cliente | Abordagem implementada | Teste real |
-| --- | --- | --- |
-| Gmail web | Tabelas, estilos inline, layout fluido e fallback HTML dos botões | Não testado |
-| Gmail app | Layout fluido, media query mobile e fallback HTML | Não testado |
-| Apple Mail | Media queries de mobile e `prefers-color-scheme` | Não testado |
-| Outlook desktop | Ghost table, VML nos CTAs, configuração de 96 PPI | Não testado |
-| Outlook.com | Regras de dark mode com `data-ogsc` e `data-ogsb` | Não testado |
+### Email
 
-Ainda não testei o email em cliente real. Considero como limitações conhecidas que o Outlook desktop pode ignorar `border-radius` e outras propriedades CSS modernas; por isso implementei VML nos CTAs. A inversão automática de cores no Gmail e em clientes Outlook pode variar. Usei endereço, CNPJ, depoimentos, métricas e preços fictícios, que devem ser revisados antes de qualquer envio ou publicação.
+A implementação considera as particularidades dos principais ambientes de leitura de email:
 
-Verifiquei a LP apenas no Chromium integrado ao VS Code, que reportou suporte a `::details-content` e `interpolate-size`. Ainda não testei Firefox, Safari, Edge nem leitores de tela. A altura da FAQ anima quando esses recursos estão disponíveis; sem eles, o conteúdo abre sem animação de altura e continua funcional. Os preços, métricas, evento e destinos `example.com` são fictícios.
+| Cliente | Recursos considerados |
+|---|---|
+| Gmail web | Tabelas, estilos inline, layout fluido e links HTML nos CTAs |
+| Gmail app | Layout fluido, media queries para dispositivos móveis e links HTML |
+| Apple Mail | Media queries para dispositivos móveis e `prefers-color-scheme` |
+| Outlook desktop | Ghost table, VML nos CTAs e configuração MSO de 96 PPI |
+| Outlook.com | Ajustes de dark mode com `data-ogsc` e `data-ogsb` |
+
+O suporte a propriedades CSS e o tratamento de cores podem variar entre clientes. No Outlook desktop, por exemplo, propriedades como `border-radius` podem não ser reproduzidas de forma consistente. Por isso, os CTAs contam com uma implementação VML complementar.
+
+O dark mode também pode envolver inversões automáticas de cores, dependendo do cliente e de suas configurações. As regras específicas e as versões alternativas do logotipo ajudam a preservar a legibilidade nesses cenários.
+
+### Landing Page
+
+A página utiliza recursos nativos do HTML e aprimoramentos progressivos de CSS. A animação da FAQ depende do suporte a `::details-content` e `interpolate-size`; em ambientes sem suporte, o conteúdo continua disponível por meio do comportamento nativo de `<details>` e `<summary>`.
+
+Os elementos interativos contam com foco visível e suporte à navegação por teclado. A estrutura semântica, a hierarquia dos títulos e o contraste das cores contribuem para a acessibilidade e a manutenção da interface.
+
+### Conteúdo demonstrativo
+
+O projeto utiliza dados fictícios para fins de apresentação, incluindo endereço, CNPJ, depoimentos, métricas, evento e preços. Os destinos `example.com` também são demonstrativos e devem ser substituídos pelos endereços definitivos antes de uma publicação ou campanha real.
 
 ## O que eu faria diferente com mais tempo
-Eu enviaria o email de teste para contas reais em Gmail web, Gmail app, Apple Mail, Outlook desktop e Outlook.com. Compararia light e dark mode, imagens bloqueadas, texto ampliado e os botões VML e HTML. Também testaria a LP em Firefox, Safari e Edge, validaria zoom de 200% e faria uma rodada completa com NVDA e VoiceOver.
+
+- Expandiria a validação de compatibilidade do email em diferentes clientes, dispositivos e configurações de light e dark mode.
+- Avaliaria o comportamento do email com imagens bloqueadas, ampliação de texto e diferentes condições de exibição dos CTAs.
+- Ampliaria a validação da landing page em diferentes navegadores, níveis de zoom e tecnologias assistivas, incluindo NVDA e VoiceOver.
+- Refinaria os detalhes de acessibilidade e responsividade a partir dos resultados dessas avaliações.
