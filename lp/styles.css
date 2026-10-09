@@ -58,6 +58,7 @@
 
 html {
 	background: var(--color-paper);
+	scroll-behavior: smooth;
 }
 
 body {
@@ -694,6 +695,10 @@ a:focus-visible,
 }
 
 @media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+
 	.btn,
 	.faq__question::after {
 		transition: none;
