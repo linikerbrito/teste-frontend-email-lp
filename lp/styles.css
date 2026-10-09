@@ -1,4 +1,4 @@
-/* Tokens: centralizam as decisões visuais para manter as próximas seções coerentes. */
+/* Tokens: reúnem cores, medidas e efeitos para facilitar a manutenção visual. */
 :root {
 	color-scheme: light;
 	--color-ink: #14161A;
@@ -8,22 +8,35 @@
 	--color-orange: #FF5A1F;
 	--color-orange-hover: #FF7A49;
 	--color-border: #DAD8D1;
+	--pixel: 1px;
+	--border-strong: 2px;
+	--line-emphasis: 3px;
+	--space-0: 0.2rem;
 	--space-1: 0.5rem;
 	--space-2: 1rem;
 	--space-3: 1.5rem;
 	--space-4: 2rem;
 	--space-5: 3rem;
 	--space-6: 4rem;
+	--size-minimum-layout: 20rem;
+	--size-header-row: 5rem;
+	--size-control-min: 2.75rem;
+	--size-process-icon: 3rem;
 	--radius-card: 0.5rem;
+	--radius-pill: 999px;
 	--shadow-panel: 0 1rem 2.5rem rgb(0 0 0 / 16%);
 	--shadow-recommended: 0 0.5rem 1.5rem rgb(20 22 26 / 14%);
+	--transition-fast: 160ms;
 	--font-body: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 	--font-size-body: 1rem;
 	--font-size-small: 0.875rem;
-	--font-size-lead: clamp(1.125rem, 2vw, 1.375rem);
+	--font-size-small-heading: 1.125rem;
+	--font-size-card-heading: 1.25rem;
+	--font-size-price: clamp(1.5rem, 2.5vw, 2rem);
+	--font-size-lead: clamp(var(--font-size-small-heading), 2vw, 1.375rem);
 	--font-size-title: clamp(2.5rem, 7vw, 4rem);
 	--font-size-section: clamp(1.75rem, 4vw, 2.5rem);
-	--font-size-metric: clamp(1.125rem, 2.8vw, 1.5rem);
+	--font-size-metric: clamp(var(--font-size-small-heading), 2.8vw, 1.5rem);
 	--line-height-body: 1.6;
 	--container-wide: 76rem;
 	--container-copy: 38rem;
@@ -40,11 +53,10 @@
 
 html {
 	background: var(--color-paper);
-	scroll-padding-top: var(--space-4);
 }
 
 body {
-	min-width: 20rem;
+	min-width: var(--size-minimum-layout);
 	margin: 0;
 	background: var(--color-paper);
 	color: var(--color-ink);
@@ -78,11 +90,6 @@ h3 {
 	text-wrap: balance;
 }
 
-#inicio,
-#planos {
-	scroll-margin-top: var(--space-4);
-}
-
 /* Utilitários: o link de salto só aparece quando recebe foco de teclado. */
 .container {
 	width: min(calc(100% - var(--space-4)), var(--container-wide));
@@ -91,17 +98,17 @@ h3 {
 
 .visually-hidden {
 	position: absolute;
-	width: 1px;
-	height: 1px;
+	width: var(--pixel);
+	height: var(--pixel);
 	padding: 0;
-	margin: -1px;
+	margin: calc(0px - var(--pixel));
 	overflow: hidden;
 	clip: rect(0, 0, 0, 0);
 	white-space: nowrap;
 	border: 0;
 }
 
-.page-skip-link {
+.skip-link {
 	position: fixed;
 	z-index: 2;
 	top: var(--space-2);
@@ -114,13 +121,13 @@ h3 {
 	font-weight: 700;
 }
 
-.page-skip-link:focus-visible {
+.skip-link:focus-visible {
 	transform: translateY(0);
 }
 
 a:focus-visible {
-	outline: 3px solid var(--focus-inner);
-	outline-offset: 3px;
+	outline: var(--line-emphasis) solid var(--focus-inner);
+	outline-offset: var(--line-emphasis);
 	box-shadow: 0 0 0 6px var(--focus-outer);
 }
 
@@ -131,7 +138,7 @@ a:focus-visible {
 
 .site-header__inner {
 	display: flex;
-	min-height: 5rem;
+	min-height: var(--size-header-row);
 	align-items: center;
 	justify-content: space-between;
 	gap: var(--space-2);
@@ -151,7 +158,7 @@ a:focus-visible {
 
 .site-header__link {
 	display: inline-flex;
-	min-height: 2.75rem;
+	min-height: var(--size-control-min);
 	align-items: center;
 	font-weight: 700;
 	text-decoration-thickness: 0.1em;
@@ -164,17 +171,17 @@ a:focus-visible {
 
 .btn {
 	display: inline-flex;
-	min-height: 2.75rem;
+	min-height: var(--size-control-min);
 	align-items: center;
 	justify-content: center;
 	padding: var(--space-1) var(--space-3);
-	border: 2px solid transparent;
+	border: var(--border-strong) solid transparent;
 	border-radius: var(--radius-card);
-	font-weight: 750;
+	font-weight: 700;
 	line-height: 1.3;
 	text-align: center;
 	text-decoration: none;
-	transition: background-color 160ms ease, transform 160ms ease;
+	transition: background-color var(--transition-fast) ease, transform var(--transition-fast) ease;
 }
 
 .btn--primary {
@@ -212,15 +219,14 @@ a:focus-visible {
 	margin-bottom: var(--space-3);
 	color: var(--color-orange);
 	font-size: var(--font-size-small);
-	font-weight: 750;
+	font-weight: 700;
 }
 
 .hero__title {
 	max-width: 16ch;
 	margin-bottom: var(--space-3);
 	font-size: var(--font-size-title);
-	font-weight: 760;
-	letter-spacing: 0;
+	font-weight: 800;
 	line-height: 1.04;
 }
 
@@ -241,13 +247,14 @@ a:focus-visible {
 .hero__event {
 	margin-bottom: var(--space-2);
 	padding-left: var(--space-2);
-	border-left: 3px solid var(--color-orange);
+	border-left: var(--line-emphasis) solid var(--color-orange);
 	color: var(--color-white);
 	font-weight: 650;
 }
 
 .hero__visual {
 	align-self: center;
+	max-width: 36rem;
 }
 
 /* Seções: o respiro compartilhado mantém uma transição regular entre conteúdo e ingressos. */
@@ -296,7 +303,7 @@ a:focus-visible {
 .process-step {
 	min-width: 0;
 	padding: var(--space-3);
-	border-top: 2px solid var(--color-ink);
+	border-top: var(--border-strong) solid var(--color-ink);
 	background: var(--color-white);
 }
 
@@ -311,19 +318,19 @@ a:focus-visible {
 .process-step__number {
 	color: var(--color-muted);
 	font-size: var(--font-size-small);
-	font-weight: 750;
+	font-weight: 700;
 	font-variant-numeric: tabular-nums;
 }
 
 .process-step__icon {
-	width: 3rem;
-	height: 3rem;
+	width: var(--size-process-icon);
+	height: var(--size-process-icon);
 }
 
 .process-step__title,
 .ticket-card__title {
 	margin-bottom: var(--space-1);
-	font-size: 1.25rem;
+	font-size: var(--font-size-card-heading);
 	line-height: 1.25;
 }
 
@@ -341,13 +348,14 @@ a:focus-visible {
 	min-width: 0;
 	flex-direction: column;
 	padding: var(--space-3);
-	border: 1px solid var(--color-border);
+	border: var(--pixel) solid var(--color-border);
 	border-radius: var(--radius-card);
 	background: var(--color-paper);
 }
 
 .ticket-card--recommended {
-	border: 3px solid var(--color-ink);
+	border: var(--pixel) solid var(--color-ink);
+	box-shadow: 0 0 0 var(--border-strong) var(--color-ink), var(--shadow-recommended);
 }
 
 .ticket-card__content {
@@ -356,21 +364,35 @@ a:focus-visible {
 
 .ticket-card__badge {
 	width: fit-content;
-	padding: 0.2rem var(--space-1);
+	padding: var(--space-0) var(--space-1);
 	margin-bottom: var(--space-2);
-	border-radius: 999px;
+	border-radius: var(--radius-pill);
 	background: var(--color-orange);
 	color: var(--color-ink);
 	font-size: var(--font-size-small);
-	font-weight: 750;
+	font-weight: 700;
 }
 
 .ticket-card__price {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: var(--space-0);
 	margin-bottom: var(--space-1);
-	font-size: var(--font-size-metric);
-	font-weight: 750;
 	font-variant-numeric: tabular-nums;
 	line-height: 1.35;
+}
+
+.ticket-card__amount {
+	font-size: var(--font-size-price);
+	font-weight: 800;
+	line-height: 1.15;
+}
+
+.ticket-card__terms {
+	color: var(--color-muted);
+	font-size: var(--font-size-small);
+	font-weight: 400;
 }
 
 .ticket-card__includes {
@@ -385,17 +407,17 @@ a:focus-visible {
 	margin-bottom: var(--space-3);
 }
 
-.ticket-card__features li {
+.ticket-card__feature {
 	position: relative;
 	padding-left: var(--space-3);
 }
 
-.ticket-card__features li::before {
+.ticket-card__feature::before {
 	position: absolute;
 	top: 0.65em;
 	left: 0;
-	width: 0.5rem;
-	height: 0.5rem;
+	width: var(--space-1);
+	height: var(--space-1);
 	border-radius: 50%;
 	background: var(--color-orange);
 	content: "";
@@ -407,7 +429,7 @@ a:focus-visible {
 
 .metric-panel {
 	padding: var(--space-3);
-	border: 1px solid var(--color-border);
+	border: var(--pixel) solid var(--color-border);
 	border-radius: var(--radius-card);
 	background: var(--color-paper);
 	box-shadow: var(--shadow-panel);
@@ -430,18 +452,18 @@ a:focus-visible {
 .metric-panel__tag,
 .metric-panel__label {
 	font-size: var(--font-size-small);
-	font-weight: 750;
+	font-weight: 700;
 }
 
 .metric-panel__tag {
-	padding: 0.2rem var(--space-1);
-	border: 1px solid var(--color-border);
-	border-radius: 999px;
+	padding: var(--space-0) var(--space-1);
+	border: var(--pixel) solid var(--color-border);
+	border-radius: var(--radius-pill);
 }
 
 .metric-panel__title {
 	margin-bottom: var(--space-2);
-	font-size: 1.125rem;
+	font-size: var(--font-size-small-heading);
 	font-weight: 700;
 }
 
@@ -454,7 +476,7 @@ a:focus-visible {
 .metric-panel__metric {
 	min-width: 0;
 	padding: var(--space-1);
-	border-top: 2px solid var(--color-orange);
+	border-top: var(--border-strong) solid var(--color-orange);
 	background: var(--color-white);
 }
 
@@ -465,8 +487,7 @@ a:focus-visible {
 
 .metric-panel__value {
 	font-size: var(--font-size-metric);
-	font-weight: 750;
-	letter-spacing: 0;
+	font-weight: 700;
 	line-height: 1.2;
 	font-variant-numeric: tabular-nums;
 }
@@ -523,24 +544,6 @@ a:focus-visible {
 	}
 }
 
-@media (min-width: 64rem) {
-	.hero__layout {
-		grid-template-columns: minmax(0, 1.05fr) minmax(20rem, 0.95fr);
-		align-items: center;
-		gap: var(--space-4);
-		min-height: 34rem;
-		padding-block: var(--space-3);
-	}
-
-	.hero__visual {
-		min-width: 0;
-	}
-
-	.metric-panel {
-		padding: var(--space-4);
-	}
-}
-
 @media (min-width: 56.25rem) {
 	.ticket-list {
 		grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -555,7 +558,21 @@ a:focus-visible {
 	.ticket-card--recommended {
 		z-index: 1;
 		transform: translateY(-0.5rem);
-		box-shadow: var(--shadow-recommended);
+	}
+}
+
+@media (min-width: 64rem) {
+	.hero__layout {
+		grid-template-columns: minmax(0, 1.05fr) minmax(20rem, 0.95fr);
+		align-items: center;
+		gap: var(--space-4);
+		min-height: 34rem;
+		padding-block: var(--space-3);
+	}
+
+	.hero__visual {
+		max-width: none;
+		min-width: 0;
 	}
 }
 

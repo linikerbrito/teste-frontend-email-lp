@@ -8,14 +8,13 @@
 	<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='4' y='4' width='24' height='24' rx='3' fill='%23FF5A1F'/%3E%3Crect x='36' y='4' width='24' height='24' rx='3' fill='%2314161A'/%3E%3Crect x='4' y='36' width='24' height='24' rx='3' fill='%2314161A'/%3E%3Crect x='36' y='36' width='24' height='24' rx='3' fill='%23FF5A1F'/%3E%3C/svg%3E">
 	<link rel="stylesheet" href="styles.css">
 </head>
-<body class="page">
-	<a class="page-skip-link" href="#conteudo">Pular para o conteúdo</a>
+<body>
+	<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
-	<header class="site-header" id="topo">
+	<header class="site-header">
 		<div class="container site-header__inner">
 			<a class="site-header__brand" href="#inicio" aria-label="Quadrante Growth Lab, início">
-				<svg class="site-header__logo" viewBox="0 0 270 56" role="img" aria-labelledby="brand-title">
-					<title id="brand-title">Quadrante Growth Lab</title>
+				<svg class="site-header__logo" viewBox="0 0 270 56" aria-hidden="true" focusable="false">
 					<rect x="2" y="5" width="13" height="13" rx="2" fill="#FF5A1F" />
 					<rect x="19" y="5" width="13" height="13" rx="2" fill="#14161A" />
 					<rect x="2" y="22" width="13" height="13" rx="2" fill="#14161A" />
@@ -91,7 +90,7 @@
 					<p class="section-heading__intro">A agenda conecta diagnóstico, oferta e aquisição a decisões práticas de conversão e escala.</p>
 				</div>
 
-				<ol class="process-list">
+				<ol class="process-list" role="list">
 					<li class="process-step">
 						<div class="process-step__heading">
 							<span class="process-step__number">01</span>
@@ -136,16 +135,16 @@
 				</div>
 
 				<!-- A ordem de preço crescente facilita a comparação sem reordenar os cards em telas pequenas. -->
-				<ul class="ticket-list">
+				<ul class="ticket-list" role="list">
 					<li class="ticket-card">
 						<div class="ticket-card__content">
 							<h3 class="ticket-card__title">Classic</h3>
-							<p class="ticket-card__price">R$ 890 à vista ou 10x de R$ 89 sem juros</p>
-							<ul class="ticket-card__features">
-								<li>Acesso presencial aos dois dias da imersão.</li>
-								<li>Materiais digitais de trabalho e exercícios.</li>
-								<li>Coffee breaks durante o evento.</li>
-								<li>Participação nas sessões gerais de perguntas.</li>
+							<p class="ticket-card__price"><span class="ticket-card__amount">R$ 890</span> <span class="ticket-card__terms">à vista ou 10x de R$ 89 sem juros</span></p>
+							<ul class="ticket-card__features" role="list">
+								<li class="ticket-card__feature">Acesso presencial aos dois dias da imersão.</li>
+								<li class="ticket-card__feature">Materiais digitais de trabalho e exercícios.</li>
+								<li class="ticket-card__feature">Coffee breaks durante o evento.</li>
+								<li class="ticket-card__feature">Participação nas sessões gerais de perguntas.</li>
 							</ul>
 						</div>
 						<a class="btn btn--primary ticket-card__cta" href="https://example.com/mesa-4x/inscricao?plano=classic&amp;utm_source=lp&amp;utm_medium=site&amp;utm_campaign=mesa-4x-nov-2026&amp;utm_content=plano-classic">Quero o ingresso Classic</a>
@@ -153,13 +152,13 @@
 					<li class="ticket-card ticket-card--recommended">
 						<div class="ticket-card__content">
 							<p class="ticket-card__badge">Recomendado</p>
-							<h3 class="ticket-card__title" id="ticket-vip-title">VIP</h3>
-							<p class="ticket-card__price">R$ 1.490 à vista ou 10x de R$ 149 sem juros</p>
+							<h3 class="ticket-card__title">VIP</h3>
+							<p class="ticket-card__price"><span class="ticket-card__amount">R$ 1.490</span> <span class="ticket-card__terms">à vista ou 10x de R$ 149 sem juros</span></p>
 							<p class="ticket-card__includes">Inclui tudo do Classic, mais:</p>
-							<ul class="ticket-card__features">
-								<li>Assento reservado nas primeiras fileiras.</li>
-								<li>Mesa de perguntas em pequeno grupo com os facilitadores.</li>
-								<li>Acesso às gravações por 30 dias.</li>
+							<ul class="ticket-card__features" role="list">
+								<li class="ticket-card__feature">Assento reservado nas primeiras fileiras.</li>
+								<li class="ticket-card__feature">Mesa de perguntas em pequeno grupo com os facilitadores.</li>
+								<li class="ticket-card__feature">Acesso às gravações por 30 dias.</li>
 							</ul>
 						</div>
 						<a class="btn btn--primary ticket-card__cta" href="https://example.com/mesa-4x/inscricao?plano=vip&amp;utm_source=lp&amp;utm_medium=site&amp;utm_campaign=mesa-4x-nov-2026&amp;utm_content=plano-vip">Quero o ingresso VIP</a>
@@ -167,12 +166,12 @@
 					<li class="ticket-card">
 						<div class="ticket-card__content">
 							<h3 class="ticket-card__title">Camarote</h3>
-							<p class="ticket-card__price">R$ 2.990 à vista ou 10x de R$ 299 sem juros</p>
+							<p class="ticket-card__price"><span class="ticket-card__amount">R$ 2.990</span> <span class="ticket-card__terms">à vista ou 10x de R$ 299 sem juros</span></p>
 							<p class="ticket-card__includes">Inclui tudo do VIP, mais:</p>
-							<ul class="ticket-card__features">
-								<li>Almoço incluído nos dois dias.</li>
-								<li>Check-in prioritário.</li>
-								<li>Uma sessão individual de 30 minutos com um facilitador após o evento.</li>
+							<ul class="ticket-card__features" role="list">
+								<li class="ticket-card__feature">Almoço incluído nos dois dias.</li>
+								<li class="ticket-card__feature">Check-in prioritário.</li>
+								<li class="ticket-card__feature">Uma sessão individual de 30 minutos com um facilitador após o evento.</li>
 							</ul>
 						</div>
 						<a class="btn btn--primary ticket-card__cta" href="https://example.com/mesa-4x/inscricao?plano=camarote&amp;utm_source=lp&amp;utm_medium=site&amp;utm_campaign=mesa-4x-nov-2026&amp;utm_content=plano-camarote">Quero o ingresso Camarote</a>
