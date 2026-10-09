@@ -8,6 +8,11 @@
 	<meta name="supported-color-schemes" content="light dark">
 	<title>Mesa 4X | Quadrante Growth Lab</title>
 	<style>
+		:root {
+			color-scheme: light dark;
+			supported-color-schemes: light dark;
+		}
+
 		html,
 		body {
 			width: 100% !important;
@@ -36,6 +41,138 @@
 			font-size: inherit;
 			text-decoration: none;
 		}
+
+		/*
+		 * Mobile. O layout já é fluido (width 100% + max-width 600px), então isto só refina:
+		 * tira o respiro externo, reduz o padding lateral e o h1, e deixa o botão em largura total.
+		 * Em clientes que ignoram media query, o email continua legível com os valores inline.
+		 */
+		@media screen and (max-width: 600px) {
+			.wrapper {
+				padding: 0 !important;
+			}
+
+			.px {
+				padding-left: 20px !important;
+				padding-right: 20px !important;
+			}
+
+			.hero-title {
+				font-size: 28px !important;
+				line-height: 34px !important;
+			}
+
+			.btn {
+				display: block !important;
+				box-sizing: border-box !important;
+				width: 100% !important;
+			}
+
+			/* 100px (e não 96px): "14h30–14h45" em negrito 14px ocupa cerca de 87px e precisa caber sem quebrar. */
+			.agenda-time {
+				width: 100px !important;
+				padding-right: 8px !important;
+				font-size: 14px !important;
+			}
+		}
+
+		/*
+		 * Dark mode. Cada classe representa um papel de cor (página, superfície, cartão, faixa escura, texto)
+		 * e não um elemento, para o mesmo bloco servir ao Apple Mail (media query) e ao Outlook.com (data-ogsb/ogsc).
+		 * Hero e rodapé já são escuros, por isso só trocam de tom. O botão laranja não muda.
+		 */
+		@media (prefers-color-scheme: dark) {
+			.bg-page {
+				background-color: #0D0F12 !important;
+			}
+
+			.bg-surface {
+				background-color: #171A1F !important;
+			}
+
+			.bg-card {
+				background-color: #20242B !important;
+			}
+
+			.bg-deep {
+				background-color: #0A0B0D !important;
+			}
+
+			.text-ink {
+				color: #F2F0EB !important;
+			}
+
+			.text-muted {
+				color: #A9AEB8 !important;
+			}
+
+			.text-subtle {
+				color: #8F95A0 !important;
+			}
+
+			.btn {
+				background-color: #FF5A1F !important;
+				color: #14161A !important;
+			}
+
+			/* Troca de logo: esconde a versão para fundo claro e revela a versão para fundo escuro. */
+			.logo-light {
+				display: none !important;
+			}
+
+			.logo-dark {
+				display: block !important;
+				max-height: none !important;
+				overflow: visible !important;
+			}
+		}
+
+		/* Outlook.com no modo escuro ignora prefers-color-scheme e injeta data-ogsb (fundo) e data-ogsc (texto). */
+		[data-ogsb] .bg-page {
+			background-color: #0D0F12 !important;
+		}
+
+		[data-ogsb] .bg-surface {
+			background-color: #171A1F !important;
+		}
+
+		[data-ogsb] .bg-card {
+			background-color: #20242B !important;
+		}
+
+		[data-ogsb] .bg-deep {
+			background-color: #0A0B0D !important;
+		}
+
+		[data-ogsb] .btn {
+			background-color: #FF5A1F !important;
+		}
+
+		[data-ogsc] .text-ink {
+			color: #F2F0EB !important;
+		}
+
+		[data-ogsc] .text-muted {
+			color: #A9AEB8 !important;
+		}
+
+		[data-ogsc] .text-subtle {
+			color: #8F95A0 !important;
+		}
+
+		[data-ogsc] .btn {
+			color: #14161A !important;
+		}
+
+		[data-ogsc] .logo-light {
+			display: none !important;
+		}
+
+		[data-ogsc] .logo-dark {
+			display: block !important;
+			max-height: none !important;
+			overflow: visible !important;
+		}
 	</style>
 	<!--[if mso]>
 	<xml>
@@ -46,32 +183,37 @@
 	</xml>
 	<![endif]-->
 </head>
-<body style="width:100%; margin:0; padding:0; background-color:#F6F4EF;">
+<body class="bg-page" style="width:100%; margin:0; padding:0; background-color:#F6F4EF;">
 	<!-- Preheader: define o texto de preview e impede que o cliente revele conteúdo seguinte. -->
 	<div style="display:none; max-width:0; max-height:0; overflow:hidden; opacity:0; color:transparent; mso-hide:all; font-size:1px; line-height:1px;">
 		Aquisição, conversão e métricas na prática. 26 e 27 de novembro, em São Paulo.
 		&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;
 	</div>
 
-	<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#F6F4EF" style="width:100%; background-color:#F6F4EF;">
+	<table role="presentation" class="bg-page" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#F6F4EF" style="width:100%; background-color:#F6F4EF;">
 		<tr>
-			<td align="center" style="padding:24px 12px;">
+			<td class="wrapper" align="center" style="padding:24px 12px;">
 				<!-- Outlook desktop ignora max-width; esta tabela condicional fixa o contêiner em 600 px. -->
 				<!--[if mso]>
 				<table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" align="center">
 					<tr>
 						<td>
 				<![endif]-->
-				<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" align="center" bgcolor="#FFFFFF" style="width:100%; max-width:600px; background-color:#FFFFFF;">
-					<!-- Cabeçalho: fundo branco para o contêiner de 600 px aparecer desde o topo. O PNG local mantém o wordmark independente de fontes e serviços externos. -->
+				<table role="presentation" class="bg-surface" width="100%" cellpadding="0" cellspacing="0" border="0" align="center" bgcolor="#FFFFFF" style="width:100%; max-width:600px; background-color:#FFFFFF;">
+					<!--
+						Cabeçalho: fundo branco para o contêiner de 600 px aparecer desde o topo.
+						Duas imagens de logo, uma por esquema de cor. A versão escura nasce oculta
+						(display:none, max-height:0 e mso-hide) e o bloco de dark mode a revela.
+					-->
 					<tr>
-						<td align="left" bgcolor="#FFFFFF" style="padding:28px 32px 16px; background-color:#FFFFFF;">
-							<img src="assets/logo-quadrante-claro.png" width="210" height="40" alt="Quadrante Growth Lab" border="0" style="display:block; width:210px; height:40px; border:0;">
+						<td class="px bg-surface" align="left" bgcolor="#FFFFFF" style="padding:28px 32px 16px; background-color:#FFFFFF;">
+							<img class="logo-light" src="assets/logo-quadrante-claro.png" width="210" height="40" alt="Quadrante Growth Lab" border="0" style="display:block; width:210px; height:40px; border:0;">
+							<img class="logo-dark" src="assets/logo-quadrante-escuro.png" width="210" height="40" alt="Quadrante Growth Lab" border="0" style="display:none; width:210px; height:40px; max-height:0; overflow:hidden; border:0; mso-hide:all;">
 						</td>
 					</tr>
 					<tr>
-						<td align="left" bgcolor="#FFFFFF" style="padding:0 32px 24px; background-color:#FFFFFF;">
-							<p style="margin:0; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:14px; font-weight:bold; line-height:20px; mso-line-height-rule:exactly;">
+						<td class="px bg-surface" align="left" bgcolor="#FFFFFF" style="padding:0 32px 24px; background-color:#FFFFFF;">
+							<p class="text-ink" style="margin:0; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:14px; font-weight:bold; line-height:20px; mso-line-height-rule:exactly;">
 								Mesa 4X · Imersão de Marketing e Vendas
 							</p>
 						</td>
@@ -79,11 +221,11 @@
 
 					<!-- Hero: fundo sólido preserva contraste sem depender de imagem de fundo. -->
 					<tr>
-						<td bgcolor="#14161A" style="padding:44px 32px 48px; background-color:#14161A;">
+						<td class="px bg-deep" bgcolor="#14161A" style="padding:44px 32px 48px; background-color:#14161A;">
 							<p style="margin:0 0 16px; color:#FF5A1F; font-family:Arial, Helvetica, sans-serif; font-size:13px; font-weight:bold; line-height:18px; mso-line-height-rule:exactly; text-transform:uppercase;">
 								26 e 27 de novembro de 2026 · São Paulo
 							</p>
-							<h1 style="margin:0 0 16px; color:#FFFFFF; font-family:Arial, Helvetica, sans-serif; font-size:36px; font-weight:bold; line-height:42px; mso-line-height-rule:exactly;">
+							<h1 class="hero-title" style="margin:0 0 16px; color:#FFFFFF; font-family:Arial, Helvetica, sans-serif; font-size:36px; font-weight:bold; line-height:42px; mso-line-height-rule:exactly;">
 								Seu marketing não precisa ser um tiro no escuro.
 							</h1>
 							<p style="margin:0 0 16px; color:#F6F4EF; font-family:Arial, Helvetica, sans-serif; font-size:18px; line-height:28px; mso-line-height-rule:exactly;">
@@ -96,42 +238,57 @@
 							<p style="margin:0 0 16px; color:#FFFFFF; font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px; mso-line-height-rule:exactly;">
 								Evento presencial · 60 vagas
 							</p>
-							<!-- utm_content=cta-hero identifica o botão clicado; destino placeholder a substituir pelo ESP por link próprio de rastreamento e URL da inscrição. -->
-							<a href="https://example.com/mesa-4x?utm_source=crm&amp;utm_medium=email&amp;utm_campaign=mesa-4x-nov-2026&amp;utm_content=cta-hero" style="display:inline-block; padding:15px 22px; border:1px solid #FF5A1F; border-radius:4px; background-color:#FF5A1F; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:16px; font-weight:bold; line-height:22px; mso-line-height-rule:exactly; text-align:center; text-decoration:none;">
+							<!--
+								Botão bulletproof (mesmo padrão do CTA final). O Outlook desktop usa o motor do Word,
+								que ignora padding e border-radius em links, então ele recebe um retângulo VML com
+								48 px de altura. Os demais clientes recebem o link estilizado; o comentário condicional
+								negado (if not mso) esconde o link do Outlook para o botão não aparecer duplicado.
+								utm_content=cta-hero identifica o botão clicado; destino placeholder a substituir
+								pelo ESP por link próprio de rastreamento e URL da inscrição.
+							-->
+							<!--[if mso]>
+							<v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://example.com/mesa-4x?utm_source=crm&amp;utm_medium=email&amp;utm_campaign=mesa-4x-nov-2026&amp;utm_content=cta-hero" style="height:48px; v-text-anchor:middle; width:250px;" arcsize="8%" strokecolor="#FF5A1F" strokeweight="1px" fillcolor="#FF5A1F">
+								<w:anchorlock/>
+								<center style="color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:16px; font-weight:bold;">Quero garantir minha vaga</center>
+							</v:roundrect>
+							<![endif]-->
+							<!--[if !mso]><!-->
+							<a class="btn" href="https://example.com/mesa-4x?utm_source=crm&amp;utm_medium=email&amp;utm_campaign=mesa-4x-nov-2026&amp;utm_content=cta-hero" style="display:inline-block; padding:12px 22px; border:1px solid #FF5A1F; border-radius:4px; background-color:#FF5A1F; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:16px; font-weight:bold; line-height:22px; mso-line-height-rule:exactly; text-align:center; text-decoration:none;">
 								Quero garantir minha vaga
 							</a>
+							<!--<![endif]-->
 						</td>
 					</tr>
 
 					<!-- Benefícios: cartões em linhas independentes evitam colunas frágeis em telas estreitas. -->
 					<tr>
-						<td style="padding:36px 32px 32px;">
-							<h2 style="margin:0 0 16px; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:24px; font-weight:bold; line-height:30px; mso-line-height-rule:exactly;">
+						<td class="px" style="padding:36px 32px 32px;">
+							<h2 class="text-ink" style="margin:0 0 16px; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:24px; font-weight:bold; line-height:30px; mso-line-height-rule:exactly;">
 								O que você vai levar
 							</h2>
 							<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
 								<tr>
-									<td bgcolor="#F6F4EF" style="padding:18px 20px; border-left:4px solid #FF5A1F; background-color:#F6F4EF;">
-										<h3 style="margin:0 0 8px; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:17px; font-weight:bold; line-height:23px; mso-line-height-rule:exactly;">Oferta e posicionamento</h3>
-										<p style="margin:0; color:#5B606B; font-family:Arial, Helvetica, sans-serif; font-size:16px; line-height:24px; mso-line-height-rule:exactly;">Monte uma oferta que deixe claro, em segundos, por que o cliente certo deveria escolher você.</p>
+									<td class="bg-card" bgcolor="#F6F4EF" style="padding:18px 20px; border-left:4px solid #FF5A1F; background-color:#F6F4EF;">
+										<h3 class="text-ink" style="margin:0 0 8px; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:17px; font-weight:bold; line-height:23px; mso-line-height-rule:exactly;">Oferta e posicionamento</h3>
+										<p class="text-muted" style="margin:0; color:#5B606B; font-family:Arial, Helvetica, sans-serif; font-size:16px; line-height:24px; mso-line-height-rule:exactly;">Monte uma oferta que deixe claro, em segundos, por que o cliente certo deveria escolher você.</p>
 									</td>
 								</tr>
 								<tr>
 									<td height="10" style="height:10px; font-size:10px; line-height:10px;">&nbsp;</td>
 								</tr>
 								<tr>
-									<td bgcolor="#F6F4EF" style="padding:18px 20px; border-left:4px solid #FF5A1F; background-color:#F6F4EF;">
-										<h3 style="margin:0 0 8px; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:17px; font-weight:bold; line-height:23px; mso-line-height-rule:exactly;">Criativos que convertem</h3>
-										<p style="margin:0; color:#5B606B; font-family:Arial, Helvetica, sans-serif; font-size:16px; line-height:24px; mso-line-height-rule:exactly;">Entenda por que um anúncio ou uma mensagem funciona, para repetir o que gera resposta.</p>
+									<td class="bg-card" bgcolor="#F6F4EF" style="padding:18px 20px; border-left:4px solid #FF5A1F; background-color:#F6F4EF;">
+										<h3 class="text-ink" style="margin:0 0 8px; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:17px; font-weight:bold; line-height:23px; mso-line-height-rule:exactly;">Criativos que convertem</h3>
+										<p class="text-muted" style="margin:0; color:#5B606B; font-family:Arial, Helvetica, sans-serif; font-size:16px; line-height:24px; mso-line-height-rule:exactly;">Entenda por que um anúncio ou uma mensagem funciona, para repetir o que gera resposta.</p>
 									</td>
 								</tr>
 								<tr>
 									<td height="10" style="height:10px; font-size:10px; line-height:10px;">&nbsp;</td>
 								</tr>
 								<tr>
-									<td bgcolor="#F6F4EF" style="padding:18px 20px; border-left:4px solid #FF5A1F; background-color:#F6F4EF;">
-										<h3 style="margin:0 0 8px; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:17px; font-weight:bold; line-height:23px; mso-line-height-rule:exactly;">Métricas que não mentem</h3>
-										<p style="margin:0; color:#5B606B; font-family:Arial, Helvetica, sans-serif; font-size:16px; line-height:24px; mso-line-height-rule:exactly;">Use CAC, LTV e ROAS para decidir onde cortar, onde investir e o que ajustar primeiro.</p>
+									<td class="bg-card" bgcolor="#F6F4EF" style="padding:18px 20px; border-left:4px solid #FF5A1F; background-color:#F6F4EF;">
+										<h3 class="text-ink" style="margin:0 0 8px; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:17px; font-weight:bold; line-height:23px; mso-line-height-rule:exactly;">Métricas que não mentem</h3>
+										<p class="text-muted" style="margin:0; color:#5B606B; font-family:Arial, Helvetica, sans-serif; font-size:16px; line-height:24px; mso-line-height-rule:exactly;">Use CAC, LTV e ROAS para decidir onde cortar, onde investir e o que ajustar primeiro.</p>
 									</td>
 								</tr>
 							</table>
@@ -140,24 +297,24 @@
 
 					<!-- Depoimentos: o fluxo linear mantém a ordem de leitura em clientes sem CSS moderno. -->
 					<tr>
-						<td style="padding:0 32px 32px;">
-							<h2 style="margin:0 0 16px; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:24px; font-weight:bold; line-height:30px; mso-line-height-rule:exactly;">
+						<td class="px" style="padding:0 32px 32px;">
+							<h2 class="text-ink" style="margin:0 0 16px; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:24px; font-weight:bold; line-height:30px; mso-line-height-rule:exactly;">
 								O que dizem os participantes
 							</h2>
 							<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
 								<tr>
-									<td bgcolor="#F6F4EF" style="padding:18px 20px; background-color:#F6F4EF;">
-										<p style="margin:0 0 8px; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:17px; font-style:italic; line-height:25px; mso-line-height-rule:exactly;">“Parecia confuso. Agora ficou óbvio o que atacar.”</p>
-										<p style="margin:0; color:#5B606B; font-family:Arial, Helvetica, sans-serif; font-size:14px; line-height:20px; mso-line-height-rule:exactly;">Camila Nunes · Sócia de uma consultoria de gestão</p>
+									<td class="bg-card" bgcolor="#F6F4EF" style="padding:18px 20px; background-color:#F6F4EF;">
+										<p class="text-ink" style="margin:0 0 8px; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:17px; font-style:italic; line-height:25px; mso-line-height-rule:exactly;">“Parecia confuso. Agora ficou óbvio o que atacar.”</p>
+										<p class="text-muted" style="margin:0; color:#5B606B; font-family:Arial, Helvetica, sans-serif; font-size:14px; line-height:20px; mso-line-height-rule:exactly;">Camila Nunes · Sócia de uma consultoria de gestão</p>
 									</td>
 								</tr>
 								<tr>
 									<td height="10" style="height:10px; font-size:10px; line-height:10px;">&nbsp;</td>
 								</tr>
 								<tr>
-									<td bgcolor="#F6F4EF" style="padding:18px 20px; background-color:#F6F4EF;">
-										<p style="margin:0 0 8px; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:17px; font-style:italic; line-height:25px; mso-line-height-rule:exactly;">“Apliquei no dia seguinte e já vi resposta no funil.”</p>
-										<p style="margin:0; color:#5B606B; font-family:Arial, Helvetica, sans-serif; font-size:14px; line-height:20px; mso-line-height-rule:exactly;">Renato Alves · Diretor de uma empresa de serviços B2B</p>
+									<td class="bg-card" bgcolor="#F6F4EF" style="padding:18px 20px; background-color:#F6F4EF;">
+										<p class="text-ink" style="margin:0 0 8px; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:17px; font-style:italic; line-height:25px; mso-line-height-rule:exactly;">“Apliquei no dia seguinte e já vi resposta no funil.”</p>
+										<p class="text-muted" style="margin:0; color:#5B606B; font-family:Arial, Helvetica, sans-serif; font-size:14px; line-height:20px; mso-line-height-rule:exactly;">Renato Alves · Diretor de uma empresa de serviços B2B</p>
 									</td>
 								</tr>
 							</table>
@@ -166,58 +323,66 @@
 
 					<!-- Agenda: linhas verticais deixam horários legíveis sem depender de layout moderno. -->
 					<tr>
-						<td style="padding:0 32px 32px;">
-							<h2 style="margin:0 0 16px; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:24px; font-weight:bold; line-height:30px; mso-line-height-rule:exactly;">
+						<td class="px" style="padding:0 32px 32px;">
+							<h2 class="text-ink" style="margin:0 0 16px; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:24px; font-weight:bold; line-height:30px; mso-line-height-rule:exactly;">
 								Agenda
 							</h2>
-							<h3 style="margin:0 0 8px; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:18px; font-weight:bold; line-height:24px; mso-line-height-rule:exactly;">
+							<h3 class="text-ink" style="margin:0 0 8px; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:18px; font-weight:bold; line-height:24px; mso-line-height-rule:exactly;">
 								Dia 1 · Diagnóstico, oferta e aquisição
 							</h3>
 							<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
-								<tr><td width="120" valign="top" style="width:120px; padding:5px 10px 5px 0; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold; line-height:22px; white-space:nowrap; mso-line-height-rule:exactly;">9h–9h30</td><td valign="top" style="padding:5px 0; color:#5B606B; font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px; mso-line-height-rule:exactly;">Credenciamento e café</td></tr>
-								<tr><td width="120" valign="top" style="width:120px; padding:5px 10px 5px 0; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold; line-height:22px; white-space:nowrap; mso-line-height-rule:exactly;">9h30–10h30</td><td valign="top" style="padding:5px 0; color:#5B606B; font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px; mso-line-height-rule:exactly;">Diagnóstico do funil: onde a demanda se perde</td></tr>
-								<tr><td width="120" valign="top" style="width:120px; padding:5px 10px 5px 0; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold; line-height:22px; white-space:nowrap; mso-line-height-rule:exactly;">10h30–10h45</td><td valign="top" style="padding:5px 0; color:#6B6F77; font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px; mso-line-height-rule:exactly;">Intervalo</td></tr>
-								<tr><td width="120" valign="top" style="width:120px; padding:5px 10px 5px 0; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold; line-height:22px; white-space:nowrap; mso-line-height-rule:exactly;">10h45–12h</td><td valign="top" style="padding:5px 0; color:#5B606B; font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px; mso-line-height-rule:exactly;">Posicionamento e construção da oferta</td></tr>
-								<tr><td width="120" valign="top" style="width:120px; padding:5px 10px 5px 0; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold; line-height:22px; white-space:nowrap; mso-line-height-rule:exactly;">12h–13h</td><td valign="top" style="padding:5px 0; color:#6B6F77; font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px; mso-line-height-rule:exactly;">Almoço</td></tr>
-								<tr><td width="120" valign="top" style="width:120px; padding:5px 10px 5px 0; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold; line-height:22px; white-space:nowrap; mso-line-height-rule:exactly;">13h–14h30</td><td valign="top" style="padding:5px 0; color:#5B606B; font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px; mso-line-height-rule:exactly;">Canais e estratégia de aquisição</td></tr>
-								<tr><td width="120" valign="top" style="width:120px; padding:5px 10px 5px 0; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold; line-height:22px; white-space:nowrap; mso-line-height-rule:exactly;">14h30–14h45</td><td valign="top" style="padding:5px 0; color:#6B6F77; font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px; mso-line-height-rule:exactly;">Intervalo</td></tr>
-								<tr><td width="120" valign="top" style="width:120px; padding:5px 10px 5px 0; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold; line-height:22px; white-space:nowrap; mso-line-height-rule:exactly;">14h45–16h</td><td valign="top" style="padding:5px 0; color:#5B606B; font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px; mso-line-height-rule:exactly;">Criativos: mensagem, teste e aprendizado</td></tr>
-								<tr><td width="120" valign="top" style="width:120px; padding:5px 10px 5px 0; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold; line-height:22px; white-space:nowrap; mso-line-height-rule:exactly;">16h–17h</td><td valign="top" style="padding:5px 0; color:#5B606B; font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px; mso-line-height-rule:exactly;">Plano de ação do dia</td></tr>
+								<tr><td class="agenda-time text-ink" width="120" valign="top" style="width:120px; padding:5px 10px 5px 0; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold; line-height:22px; white-space:nowrap; mso-line-height-rule:exactly;">9h–9h30</td><td class="text-muted" valign="top" style="padding:5px 0; color:#5B606B; font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px; mso-line-height-rule:exactly;">Credenciamento e café</td></tr>
+								<tr><td class="agenda-time text-ink" width="120" valign="top" style="width:120px; padding:5px 10px 5px 0; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold; line-height:22px; white-space:nowrap; mso-line-height-rule:exactly;">9h30–10h30</td><td class="text-muted" valign="top" style="padding:5px 0; color:#5B606B; font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px; mso-line-height-rule:exactly;">Diagnóstico do funil: onde a demanda se perde</td></tr>
+								<tr><td class="agenda-time text-ink" width="120" valign="top" style="width:120px; padding:5px 10px 5px 0; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold; line-height:22px; white-space:nowrap; mso-line-height-rule:exactly;">10h30–10h45</td><td class="text-subtle" valign="top" style="padding:5px 0; color:#6B6F77; font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px; mso-line-height-rule:exactly;">Intervalo</td></tr>
+								<tr><td class="agenda-time text-ink" width="120" valign="top" style="width:120px; padding:5px 10px 5px 0; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold; line-height:22px; white-space:nowrap; mso-line-height-rule:exactly;">10h45–12h</td><td class="text-muted" valign="top" style="padding:5px 0; color:#5B606B; font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px; mso-line-height-rule:exactly;">Posicionamento e construção da oferta</td></tr>
+								<tr><td class="agenda-time text-ink" width="120" valign="top" style="width:120px; padding:5px 10px 5px 0; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold; line-height:22px; white-space:nowrap; mso-line-height-rule:exactly;">12h–13h</td><td class="text-subtle" valign="top" style="padding:5px 0; color:#6B6F77; font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px; mso-line-height-rule:exactly;">Almoço</td></tr>
+								<tr><td class="agenda-time text-ink" width="120" valign="top" style="width:120px; padding:5px 10px 5px 0; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold; line-height:22px; white-space:nowrap; mso-line-height-rule:exactly;">13h–14h30</td><td class="text-muted" valign="top" style="padding:5px 0; color:#5B606B; font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px; mso-line-height-rule:exactly;">Canais e estratégia de aquisição</td></tr>
+								<tr><td class="agenda-time text-ink" width="120" valign="top" style="width:120px; padding:5px 10px 5px 0; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold; line-height:22px; white-space:nowrap; mso-line-height-rule:exactly;">14h30–14h45</td><td class="text-subtle" valign="top" style="padding:5px 0; color:#6B6F77; font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px; mso-line-height-rule:exactly;">Intervalo</td></tr>
+								<tr><td class="agenda-time text-ink" width="120" valign="top" style="width:120px; padding:5px 10px 5px 0; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold; line-height:22px; white-space:nowrap; mso-line-height-rule:exactly;">14h45–16h</td><td class="text-muted" valign="top" style="padding:5px 0; color:#5B606B; font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px; mso-line-height-rule:exactly;">Criativos: mensagem, teste e aprendizado</td></tr>
+								<tr><td class="agenda-time text-ink" width="120" valign="top" style="width:120px; padding:5px 10px 5px 0; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold; line-height:22px; white-space:nowrap; mso-line-height-rule:exactly;">16h–17h</td><td class="text-muted" valign="top" style="padding:5px 0; color:#5B606B; font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px; mso-line-height-rule:exactly;">Plano de ação do dia</td></tr>
 							</table>
 
-							<h3 style="margin:24px 0 8px; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:18px; font-weight:bold; line-height:24px; mso-line-height-rule:exactly;">
+							<h3 class="text-ink" style="margin:24px 0 8px; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:18px; font-weight:bold; line-height:24px; mso-line-height-rule:exactly;">
 								Dia 2 · Conversão, operação e escala
 							</h3>
 							<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
-								<tr><td width="120" valign="top" style="width:120px; padding:5px 10px 5px 0; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold; line-height:22px; white-space:nowrap; mso-line-height-rule:exactly;">9h–9h15</td><td valign="top" style="padding:5px 0; color:#5B606B; font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px; mso-line-height-rule:exactly;">Abertura e revisão do dia anterior</td></tr>
-								<tr><td width="120" valign="top" style="width:120px; padding:5px 10px 5px 0; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold; line-height:22px; white-space:nowrap; mso-line-height-rule:exactly;">9h15–10h45</td><td valign="top" style="padding:5px 0; color:#5B606B; font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px; mso-line-height-rule:exactly;">Conversão: etapas, objeções e acompanhamento</td></tr>
-								<tr><td width="120" valign="top" style="width:120px; padding:5px 10px 5px 0; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold; line-height:22px; white-space:nowrap; mso-line-height-rule:exactly;">10h45–11h</td><td valign="top" style="padding:5px 0; color:#6B6F77; font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px; mso-line-height-rule:exactly;">Intervalo</td></tr>
-								<tr><td width="120" valign="top" style="width:120px; padding:5px 10px 5px 0; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold; line-height:22px; white-space:nowrap; mso-line-height-rule:exactly;">11h–12h</td><td valign="top" style="padding:5px 0; color:#5B606B; font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px; mso-line-height-rule:exactly;">Métricas: CAC, LTV e ROAS na tomada de decisão</td></tr>
-								<tr><td width="120" valign="top" style="width:120px; padding:5px 10px 5px 0; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold; line-height:22px; white-space:nowrap; mso-line-height-rule:exactly;">12h–13h</td><td valign="top" style="padding:5px 0; color:#6B6F77; font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px; mso-line-height-rule:exactly;">Almoço</td></tr>
-								<tr><td width="120" valign="top" style="width:120px; padding:5px 10px 5px 0; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold; line-height:22px; white-space:nowrap; mso-line-height-rule:exactly;">13h–14h30</td><td valign="top" style="padding:5px 0; color:#5B606B; font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px; mso-line-height-rule:exactly;">Operação comercial e rotina de execução</td></tr>
-								<tr><td width="120" valign="top" style="width:120px; padding:5px 10px 5px 0; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold; line-height:22px; white-space:nowrap; mso-line-height-rule:exactly;">14h30–14h45</td><td valign="top" style="padding:5px 0; color:#6B6F77; font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px; mso-line-height-rule:exactly;">Intervalo</td></tr>
-								<tr><td width="120" valign="top" style="width:120px; padding:5px 10px 5px 0; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold; line-height:22px; white-space:nowrap; mso-line-height-rule:exactly;">14h45–16h</td><td valign="top" style="padding:5px 0; color:#5B606B; font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px; mso-line-height-rule:exactly;">Prioridades para crescer sem perder controle</td></tr>
-								<tr><td width="120" valign="top" style="width:120px; padding:5px 10px 5px 0; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold; line-height:22px; white-space:nowrap; mso-line-height-rule:exactly;">16h–17h</td><td valign="top" style="padding:5px 0; color:#5B606B; font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px; mso-line-height-rule:exactly;">Plano de 30 dias e encerramento</td></tr>
+								<tr><td class="agenda-time text-ink" width="120" valign="top" style="width:120px; padding:5px 10px 5px 0; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold; line-height:22px; white-space:nowrap; mso-line-height-rule:exactly;">9h–9h15</td><td class="text-muted" valign="top" style="padding:5px 0; color:#5B606B; font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px; mso-line-height-rule:exactly;">Abertura e revisão do dia anterior</td></tr>
+								<tr><td class="agenda-time text-ink" width="120" valign="top" style="width:120px; padding:5px 10px 5px 0; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold; line-height:22px; white-space:nowrap; mso-line-height-rule:exactly;">9h15–10h45</td><td class="text-muted" valign="top" style="padding:5px 0; color:#5B606B; font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px; mso-line-height-rule:exactly;">Conversão: etapas, objeções e acompanhamento</td></tr>
+								<tr><td class="agenda-time text-ink" width="120" valign="top" style="width:120px; padding:5px 10px 5px 0; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold; line-height:22px; white-space:nowrap; mso-line-height-rule:exactly;">10h45–11h</td><td class="text-subtle" valign="top" style="padding:5px 0; color:#6B6F77; font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px; mso-line-height-rule:exactly;">Intervalo</td></tr>
+								<tr><td class="agenda-time text-ink" width="120" valign="top" style="width:120px; padding:5px 10px 5px 0; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold; line-height:22px; white-space:nowrap; mso-line-height-rule:exactly;">11h–12h</td><td class="text-muted" valign="top" style="padding:5px 0; color:#5B606B; font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px; mso-line-height-rule:exactly;">Métricas: CAC, LTV e ROAS na tomada de decisão</td></tr>
+								<tr><td class="agenda-time text-ink" width="120" valign="top" style="width:120px; padding:5px 10px 5px 0; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold; line-height:22px; white-space:nowrap; mso-line-height-rule:exactly;">12h–13h</td><td class="text-subtle" valign="top" style="padding:5px 0; color:#6B6F77; font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px; mso-line-height-rule:exactly;">Almoço</td></tr>
+								<tr><td class="agenda-time text-ink" width="120" valign="top" style="width:120px; padding:5px 10px 5px 0; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold; line-height:22px; white-space:nowrap; mso-line-height-rule:exactly;">13h–14h30</td><td class="text-muted" valign="top" style="padding:5px 0; color:#5B606B; font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px; mso-line-height-rule:exactly;">Operação comercial e rotina de execução</td></tr>
+								<tr><td class="agenda-time text-ink" width="120" valign="top" style="width:120px; padding:5px 10px 5px 0; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold; line-height:22px; white-space:nowrap; mso-line-height-rule:exactly;">14h30–14h45</td><td class="text-subtle" valign="top" style="padding:5px 0; color:#6B6F77; font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px; mso-line-height-rule:exactly;">Intervalo</td></tr>
+								<tr><td class="agenda-time text-ink" width="120" valign="top" style="width:120px; padding:5px 10px 5px 0; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold; line-height:22px; white-space:nowrap; mso-line-height-rule:exactly;">14h45–16h</td><td class="text-muted" valign="top" style="padding:5px 0; color:#5B606B; font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px; mso-line-height-rule:exactly;">Prioridades para crescer sem perder controle</td></tr>
+								<tr><td class="agenda-time text-ink" width="120" valign="top" style="width:120px; padding:5px 10px 5px 0; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold; line-height:22px; white-space:nowrap; mso-line-height-rule:exactly;">16h–17h</td><td class="text-muted" valign="top" style="padding:5px 0; color:#5B606B; font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px; mso-line-height-rule:exactly;">Plano de 30 dias e encerramento</td></tr>
 							</table>
 						</td>
 					</tr>
 
-					<!-- CTA final: o link segue simples nesta etapa; o fallback VML entra depois da aprovação. -->
+					<!-- CTA final: mesmo botão bulletproof do hero (VML para o Outlook desktop, <a> para os demais). -->
 					<tr>
-						<td align="center" bgcolor="#F6F4EF" style="padding:0 32px 38px; background-color:#F6F4EF;">
-							<p style="margin:0 0 16px; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:18px; line-height:27px; mso-line-height-rule:exactly;">
+						<td class="px bg-card" align="center" bgcolor="#F6F4EF" style="padding:0 32px 38px; background-color:#F6F4EF;">
+							<p class="text-ink" style="margin:0 0 16px; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:18px; line-height:27px; mso-line-height-rule:exactly;">
 								Você sai com um plano claro para o próximo ciclo de marketing e vendas. São 60 vagas.
 							</p>
 							<!-- utm_content=cta-final identifica o botão clicado; destino placeholder a substituir pelo ESP por link próprio de rastreamento e URL da inscrição. -->
-							<a href="https://example.com/mesa-4x?utm_source=crm&amp;utm_medium=email&amp;utm_campaign=mesa-4x-nov-2026&amp;utm_content=cta-final" style="display:inline-block; padding:15px 22px; border:1px solid #FF5A1F; border-radius:4px; background-color:#FF5A1F; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:16px; font-weight:bold; line-height:22px; mso-line-height-rule:exactly; text-align:center; text-decoration:none;">
+							<!--[if mso]>
+							<v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://example.com/mesa-4x?utm_source=crm&amp;utm_medium=email&amp;utm_campaign=mesa-4x-nov-2026&amp;utm_content=cta-final" style="height:48px; v-text-anchor:middle; width:250px;" arcsize="8%" strokecolor="#FF5A1F" strokeweight="1px" fillcolor="#FF5A1F">
+								<w:anchorlock/>
+								<center style="color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:16px; font-weight:bold;">Quero garantir minha vaga</center>
+							</v:roundrect>
+							<![endif]-->
+							<!--[if !mso]><!-->
+							<a class="btn" href="https://example.com/mesa-4x?utm_source=crm&amp;utm_medium=email&amp;utm_campaign=mesa-4x-nov-2026&amp;utm_content=cta-final" style="display:inline-block; padding:12px 22px; border:1px solid #FF5A1F; border-radius:4px; background-color:#FF5A1F; color:#14161A; font-family:Arial, Helvetica, sans-serif; font-size:16px; font-weight:bold; line-height:22px; mso-line-height-rule:exactly; text-align:center; text-decoration:none;">
 								Quero garantir minha vaga
 							</a>
+							<!--<![endif]-->
 						</td>
 					</tr>
 
 					<!-- Rodapé: identificação e links de controle ficam acessíveis em texto. -->
 					<tr>
-						<td align="center" bgcolor="#14161A" style="padding:26px 32px 30px; background-color:#14161A;">
+						<td class="px bg-deep" align="center" bgcolor="#14161A" style="padding:26px 32px 30px; background-color:#14161A;">
 							<p style="margin:0 0 8px; color:#FFFFFF; font-family:Arial, Helvetica, sans-serif; font-size:14px; font-weight:bold; line-height:20px; mso-line-height-rule:exactly;">Mesa 4X · Imersão de Marketing e Vendas</p>
 							<p style="margin:0 0 8px; color:#F6F4EF; font-family:Arial, Helvetica, sans-serif; font-size:14px; line-height:21px; mso-line-height-rule:exactly;">26 e 27 de novembro de 2026 · São Paulo</p>
 							<p style="margin:0 0 8px; color:#F6F4EF; font-family:Arial, Helvetica, sans-serif; font-size:14px; line-height:21px; mso-line-height-rule:exactly;">Espaço Quadrante · Rua do Mercado Novo, 248, Pinheiros, São Paulo - SP</p>
